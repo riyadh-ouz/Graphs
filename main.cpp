@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         for (int i = 0; i < n; i++) {
 
             vi path = graph.path(i, from);
-            vi path1 = graph.path_without_cost(i, from);
+            //vi path = graph.path_without_cost(i, from);
 
             cout << i << "      " << distances[i].first << "                 ";
 

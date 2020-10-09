@@ -63,7 +63,7 @@ void Graph::visualise(std::ostream& output_stream) const
 
 vii Graph::bfs(int source) const
 {
-    // m_n_vertices paths from the source initialized with previous -1 and distance -1
+    // m_n_vertices paths from the source initialized with distance -1 and previous -1
     vii paths(m_n_vertices, make_pair(-1 ,-1));
 
     paths[source].first = 0; // the cost from the source to the source
@@ -156,29 +156,18 @@ vii Graph::Dijkstra(int source) const
 vi Graph::path(int to, int from) const
 {
     vi path;
+    vii paths;
 
-    if (m_weighted) {
-        vii paths = Dijkstra(from);
+    if (m_weighted) paths = Dijkstra(from);
+    else paths = bfs(from);
 
-        path.push_back(to);
-        int node = to;
+    path.push_back(to);
+    int node = to;
 
-        while (node != from) {
-            node = paths[node].second; // get the previous for the current node
-            path.push_back(node);
-        };
-    }
-    else {
-        vii paths = bfs(from);
-
-        path.push_back(to);
-        int node = to;
-
-        while (node != from) {
-            node = paths[node].second; // get the previous for the current node
-            path.push_back(node);
-        };
-    }
+    while (node != from) {
+        node = paths[node].second; // get the previous for the current node
+        path.push_back(node);
+    };
 
     reverse(path.begin(), path.end()); // to get the path from "from" to "to"
     return path;
@@ -465,7 +454,7 @@ vii bfs_unweighted_graph(const vector<vi>& edges, int source) {
 
     int n_vertices = edges.size();
 
-    // n_vertices paths from the source initialized with previous -1 and distance -1
+    // n_vertices paths from the source initialized with distance -1 and previous -1
     vii paths(n_vertices, make_pair(-1 ,-1));
 
     paths[source].first = 0; // the cost from the source to the source
