@@ -33,8 +33,8 @@ public:
     vi path_without_cost(int to, int from = 0) const;
     void dfs(int source = 0, std::ostream& output_stream = std::cout);
 
-    /// Warning: avoid calling numberOfComponents for directed graphs;
-    unsigned int numberOfComponents();
+    /// Warning: avoid calling number_of_components for directed graphs;
+    unsigned int number_of_components();
     /// Case: graph like tree (no matter directed or undirected)
     unsigned int height_tree(int root = 0, int parent = -1) const;
 
@@ -63,7 +63,7 @@ void visualise_unweighted_graph(const std::vector<vi>& edges, std::ostream& outp
 void dfs_graph_recursion(const std::vector<vi>& edges, int source, std::vector<bool>& visited);
 void dfs_graph(const std::vector<vi>& edges, int source, std::vector<bool>& visited);
 // warning: the graph passed to the following function should be undirected
-int numberOfComponents_graph(const std::vector<vi>& edges);
+int number_of_components_graph(const std::vector<vi>& edges);
 // case of a graph like tree
 int height_tree(int root, const std::vector<vi>& edges, int parent = -1);
 

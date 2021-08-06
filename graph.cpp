@@ -4,7 +4,7 @@ using namespace std;
 
 /// the Graph class
 
-Graph::Graph(unsigned int n_vertices,unsigned int n_edges, bool weighted, bool directed, std::istream& input_stream)
+Graph::Graph(unsigned int n_vertices, unsigned int n_edges, bool weighted, bool directed, std::istream& input_stream)
 :m_n_vertices{n_vertices}, m_n_edges{n_edges}, m_weighted{weighted}, m_directed{directed}
 {
     if (weighted) {
@@ -236,17 +236,17 @@ void Graph::dfs(int source, ostream& output_stream) {
 
 }
 
-unsigned int Graph::numberOfComponents() {
-    unsigned int numberOfComponents = 0;
+unsigned int Graph::number_of_components() {
+    unsigned int number_of_components = 0;
 
     m_visited = new bool[m_n_vertices];
     for (int i = 0; i < (int)m_n_vertices; i++) m_visited[i] = false; // initialize m_visited to false
 
-    if (m_directed) throw Error("Warning: numberOfComponents should be used with undirected graphs...\n");
+    if (m_directed) throw Error("Warning: number_of_components should be used with undirected graphs...\n");
 
     for (int node = 0; node < (int)m_n_vertices; node++)
         if (!m_visited[node]) {
-            numberOfComponents ++;
+            number_of_components ++;
 
             // start dfs[node]
             stack<int> s;
@@ -278,7 +278,7 @@ unsigned int Graph::numberOfComponents() {
         }
 
     delete[] m_visited;
-    return numberOfComponents;
+    return number_of_components;
 }
 
 unsigned int Graph::height_tree(int root, int parent) const
@@ -394,19 +394,19 @@ void dfs_graph_recursion(const vector<vi>& edges, int source, vector<bool>& visi
 
 }
 
-int numberOfComponents_graph(const vector<vi>& edges) {
+int number_of_components_graph(const vector<vi>& edges) {
 
-    int numberOfComponents = 0, n_vertices = edges.size();
+    int number_of_components = 0, n_vertices = edges.size();
 
     vector<bool> visited(n_vertices, false);
 
     for (int node = 0; node < n_vertices; node++)
         if (!visited[node]) {
-            numberOfComponents ++;
+            number_of_components ++;
             dfs_graph_recursion(edges, node, visited);
         }
 
-    return numberOfComponents;
+    return number_of_components;
 
 }
 // case graph like tree
