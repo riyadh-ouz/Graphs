@@ -13,65 +13,61 @@ class DSU:
     def __init__(self, n_vertices):
         
         self.__n_vertices = n_vertices
-        self.__parent = [ -1 for i in range(n_vertices)]
-        self.__groupSize = [ 0 for i in range(n_vertices)]
-
-        for i in range(n_vertices):
-            self.__parent[i] = i
-            self.__groupSize[i] = 1
+        self.__parent = [ i for i in range(n_vertices)]
+        self.__group_size = [ 1 for i in range(n_vertices)]
 
 
-    def findLeader(self, x):
+    def find_leader(self, x):
         
         if x >= self.__n_vertices: raise ValueError
 
         if self.__parent[x] == x:  return x
 
-        return self.findLeader(self.__parent[x])
+        return self.find_leader(self.__parent[x])
 
 
-    def sameGroup(self, x, y):
-        leader1 = self.findLeader(x);
-        leader2 = self.findLeader(y);
+    def same_group(self, x, y):
+        leader1 = self.find_leader(x)
+        leader2 = self.find_leader(y)
 
         return leader1 == leader2
 
 
-    def mergeGroups(self, x, y):
-        leader1 = self.findLeader(x);
-        leader2 = self.findLeader(y);
+    def merge_groups(self, x, y):
+        leader1 = self.find_leader(x)
+        leader2 = self.find_leader(y)
 
         if leader1 == leader2:  return
 
-        if self.__groupSize[leader1] > self.__groupSize[leader2]:
+        if self.__group_size[leader1] > self.__group_size[leader2]:
             
             self.__parent[leader2] =  leader1
-            self.__groupSize[leader1] += self.__groupSize[leader2]
+            self.__group_size[leader1] += self.__group_size[leader2]
 
         else:
             self.__parent[leader1] =  leader2
-            self.__groupSize[leader2] += self.__groupSize[leader1]
+            self.__group_size[leader2] += self.__group_size[leader1]
 
 
-    def getSize(self, x):
-        leader = self.findLeader(x)
-        return self.__groupSize[leader]
+    def get_size(self, x):
+        leader = self.find_leader(x)
+        return self.__group_size[leader]
 
 if __name__ == "__main__":
     
     try:
         dsu = DSU(9)
-        dsu.mergeGroups(4, 3)
-        dsu.mergeGroups(2, 1)
+        dsu.merge_groups(4, 3)
+        dsu.merge_groups(2, 1)
 
-        dsu.mergeGroups(1, 3)
-        dsu.mergeGroups(6, 5)
+        dsu.merge_groups(1, 3)
+        dsu.merge_groups(6, 5)
 
         while True:
             x = int(input("x = "))
             y = int(input("y = "))
-            print(dsu.sameGroup(x, y))
-            if dsu.sameGroup(x, y): print("Size = " + str(dsu.getSize(x)))
+            print(dsu.same_group(x, y))
+            if dsu.same_group(x, y): print("Size = " + str(dsu.get_size(x)))
             if (x == 99): break
         
     except ValueError:

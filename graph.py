@@ -132,7 +132,7 @@ class Graph:
                     
 
             result = [ 0 for i in range(self.__n_vertices)]
-            for i in range(self.__n_vertices):  result[i] = [cost[i], parent[i]];
+            for i in range(self.__n_vertices):  result[i] = [cost[i], parent[i]]
 
             return result
         
@@ -203,25 +203,25 @@ class Graph:
             for v in self.__edges[u]:
                 if self.__weighted:
                     if not self.__visited[v[0]]:
-                            s.put(v[0]);
+                            s.put(v[0])
                 else:
                     if not self.__visited[v]:
-                        s.put(v);
+                        s.put(v)
                 
         output_stream("\n")
 
 
-    # Warning: avoid calling numberOfComponents for directed graphs;
-    def numberOfComponents(self):
+    # Warning: avoid calling number_of_components for directed graphs
+    def number_of_components(self):
         
-        numberOfComponents = 0
+        number_of_components = 0
         self.__visited = [ False for i in range(self.__n_vertices)]
 
         if self.__directed: raise  ValueError
 
         for node in range(self.__n_vertices):
             if not self.__visited[node]:
-                numberOfComponents += 1
+                number_of_components += 1
 
                 # start dfs[node]
                 
@@ -238,14 +238,14 @@ class Graph:
                     for v in self.__edges[u]:
                         if self.__weighted:
                             if not self.__visited[v[0]]:
-                                    s.put(v[0]);
+                                    s.put(v[0])
                         else:
                             if not self.__visited[v]:
-                                s.put(v);
+                                s.put(v)
                                 
                 # end dfs[node]
                 
-        return numberOfComponents
+        return number_of_components
 
 
     # Case: graph like tree (no matter directed or undirected)

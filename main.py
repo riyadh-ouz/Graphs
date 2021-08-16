@@ -1,4 +1,4 @@
-from graph import *
+from graph import Graph
 
 try:
 
@@ -37,7 +37,7 @@ try:
     graph1 = Graph(9, 7, False, False)
     graph1.visualise()
     graph1.dfs(1)
-    print("Components: " + str(graph1.numberOfComponents()))
+    print("Components: " + str(graph1.number_of_components()))
     print("Height: " + str(graph1.height_tree(1, -1)))
 
 
