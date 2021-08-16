@@ -643,61 +643,61 @@ vi path_graph(const vector<vii>& edges, int to, int from) {
 >>> This algorithm is used whenever needed (before or after graph manipulation)
 */
 
-DSU::DSU(int n_vertices) :m_n_vertices{n_vertices}, parent{new int[n_vertices]}, groupSize{new int[n_vertices]}
+DSU::DSU(int n_vertices) :m_n_vertices{n_vertices}, parent{new int[n_vertices]}, group_size{new int[n_vertices]}
 {
     for(int i = 0; i < n_vertices; i++)
     {
         parent[i] = i;
-        groupSize[i] = 1;
+        group_size[i] = 1;
     }
 }
 
 DSU::~DSU() {
     delete[] parent;
-    delete[] groupSize;
+    delete[] group_size;
 }
 
-int DSU::findLeader(int i) {
+int DSU::find_leader(int i) {
 
     if (i >= m_n_vertices) throw Error("Error: argument value error -> (DSU: i >= m_n_vertices)...\n");
 
     if(parent[i] == i)  return i;
 
     // This technique of returning will store all the leaders in the first traverse -> reduce the complexity
-    return parent[i] = findLeader(parent[i]);
+    return parent[i] = find_leader(parent[i]);
 }
 
-bool DSU::sameGroup(int x, int y)
+bool DSU::same_group(int x, int y)
 {
-    int leader1 = findLeader(x);
-    int leader2 = findLeader(y);
+    int leader1 = find_leader(x);
+    int leader2 = find_leader(y);
 
     return leader1 == leader2;
 }
 
-void DSU::mergeGroups(int x, int y)
+void DSU::merge_groups(int x, int y)
 {
-    int leader1 = findLeader(x);
-    int leader2 = findLeader(y);
+    int leader1 = find_leader(x);
+    int leader2 = find_leader(y);
 
     if(leader1 == leader2)  return;
 
-    if(groupSize[leader1] > groupSize[leader2])
+    if(group_size[leader1] > group_size[leader2])
     {
         parent[leader2] =  leader1;
-        groupSize[leader1] += groupSize[leader2];
+        group_size[leader1] += group_size[leader2];
     }
 
     else
     {
         parent[leader1] =  leader2;
-        groupSize[leader2] += groupSize[leader1];
+        group_size[leader2] += group_size[leader1];
     }
 }
 
-int DSU::getSize(int x) {
-    int leader = findLeader(x);
-    return groupSize[leader];
+int DSU::get_size(int x) {
+    int leader = find_leader(x);
+    return group_size[leader];
 }
 
 

@@ -84,16 +84,16 @@ class DSU
 {
 public:
     DSU(int n_vertices);
-    int findLeader(int i);
-    bool sameGroup(int x, int y);
-    void mergeGroups(int x, int y);
-    int getSize(int x);
+    int find_leader(int i);
+    bool same_group(int x, int y);
+    void merge_groups(int x, int y);
+    int get_size(int x);
     ~DSU();
 
 private:
     int m_n_vertices;
     int* parent;
-    int* groupSize;
+    int* group_size;
 };
 
 

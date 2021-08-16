@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
         Graph graph1(n, m, false, false, is);
         graph1.visualise();
         graph1.dfs(1);
-        cout << "Components: " << graph1.numberOfComponents() << "\n";
+        cout << "Components: " << graph1.number_of_components() << "\n";
         cout << "Height: " << graph1.height_tree(1, -1) << "\n";
         */
 
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
         vector<bool> visited(n);
         dfs_graph(edges, 1, visited);
 
-        cout << "Components: " << numberOfComponents_graph(edges) << "\n";
+        cout << "Components: " << number_of_components_graph(edges) << "\n";
         cout << "Height: " << height_tree(1, edges, -1) << "\n";
         */
 
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
         vector<vi> edges = initializer_unweighted_graph(n, m, false, is);
         visualise_unweighted_graph(edges);
 
-        cout << "Components: " << numberOfComponents_graph(edges) << "\n";
+        cout << "Components: " << number_of_components_graph(edges) << "\n";
 
         cout << "\nEnter the source ... ";
         int from;   cin >> from;
@@ -122,16 +122,16 @@ int main(int argc, char* argv[])
         /*
         // DSU
         DSU dsu(9);
-        dsu.mergeGroups(4, 3);
-        dsu.mergeGroups(2, 1);
+        dsu.merge_groups(4, 3);
+        dsu.merge_groups(2, 1);
 
-        dsu.mergeGroups(1, 3);
-        dsu.mergeGroups(6, 5);
+        dsu.merge_groups(1, 3);
+        dsu.merge_groups(6, 5);
 
         int x, y;
         cin >> x >> y;
         do {
-            cout << boolalpha << dsu.sameGroup(x, y) << endl;
+            cout << boolalpha << dsu.same_group(x, y) << endl;
             cin >> x >> y;
         } while (x != 9);
         */
